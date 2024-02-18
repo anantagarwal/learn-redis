@@ -72,7 +72,9 @@ public class RedisController {
         template.opsForHash().put(key, "role", admin);
 
         Object admin1 = template.opsForHash().get(key, "admin");
+        Map<Object, Object> entries = template.opsForHash().entries(key);
         System.out.println("admin1 = " + admin1);
+        System.out.println("entries = " + entries);
 
     }
 
