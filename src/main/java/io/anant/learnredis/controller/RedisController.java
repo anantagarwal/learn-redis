@@ -53,4 +53,27 @@ public class RedisController {
         return new SimpleEntry<String, String>(key, value);
     }
 
+    @PostMapping("/hash/{key}")
+    public void postMap(@PathVariable("key") String key) {
+
+        User adminUser = new User();
+        adminUser.setName("Adminus Admistradore");
+        adminUser.setEmail("admin@example.com");
+        adminUser.setPassword("Reindeer Flotilla");//
+        adminUser.addRole(Role.builder().name("admin").id("1").build());
+
+
+        Role admin = Role.builder().name("admin").id("1").build();
+        
+        Map data = Map.of("admin", adminUser, "role", admin);
+        
+        template.opsForHash().put(key, "admin", adminUser);
+        template.opsForHash().put(key, "admin1", adminUser);
+        template.opsForHash().put(key, "role", admin);
+
+        Object admin1 = template.opsForHash().get(key, "admin");
+        System.out.println("admin1 = " + admin1);
+
+    }
+
 }

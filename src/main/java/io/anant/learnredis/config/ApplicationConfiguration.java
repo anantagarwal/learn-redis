@@ -31,6 +31,8 @@ public class ApplicationConfiguration {
         template.setConnectionFactory(connectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setHashValueSerializer(jackson2JsonRedisSerializer);
         return template;
     }
 
